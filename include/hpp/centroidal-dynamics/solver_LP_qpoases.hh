@@ -16,7 +16,8 @@ namespace centroidal_dynamics {
 class CENTROIDAL_DYNAMICS_DLLAPI Solver_LP_qpoases : public Solver_LP_abstract {
  private:
   qpOASES::Options m_options;   // solver options
-  qpOASES::SQProblem m_solver;  // qpoases solver
+  //qpOASES::SQProblem * m_solver;  // qpoases solver
+  qpOASES::SQProblem m_solver;
 
   MatrixXX m_H;                   // Hessian matrix
   bool m_init_succeeded;          // true if solver has been successfully initialized
@@ -24,6 +25,7 @@ class CENTROIDAL_DYNAMICS_DLLAPI Solver_LP_qpoases : public Solver_LP_abstract {
 
  public:
   Solver_LP_qpoases();
+  virtual ~Solver_LP_qpoases() {}
 
   /** Solve the linear program
    *  minimize    c' x
@@ -38,8 +40,10 @@ class CENTROIDAL_DYNAMICS_DLLAPI Solver_LP_qpoases : public Solver_LP_abstract {
 
   /** Get the objective value of the last solved problem. */
   virtual double getObjectiveValue() { return m_solver.getObjVal(); }
+  //virtual double getObjectiveValue() { return m_solver->getObjVal(); }
 
   virtual void getDualSolution(Ref_vectorX res) { m_solver.getDualSolution(res.data()); }
+  //virtual void getDualSolution(Ref_vectorX res) { m_solver->getDualSolution(res.data()); }
 };
 
 }  // end namespace centroidal_dynamics

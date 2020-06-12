@@ -51,7 +51,6 @@ Equilibrium::Equilibrium(const string& name, const double mass, const unsigned i
     m_is_cdd_initialized = true;
     // srand ( (unsigned int) (time(NULL)) );
   }
-
   m_name = name;
   m_solver_type = solver_type;
   m_solver = Solver_LP_abstract::getNewSolver(solver_type);
@@ -70,6 +69,10 @@ Equilibrium::Equilibrium(const string& name, const double mass, const unsigned i
   m_d.head<3>() = m_mass * m_gravity;
   m_D.setZero();
   m_D.block<3, 3>(3, 0) = crossMatrix(-m_mass * m_gravity);
+}
+
+Equilibrium::~Equilibrium() {
+  delete m_solver;
 }
 
 bool Equilibrium::computeGenerators(Cref_matrixX3 contactPoints, Cref_matrixX3 contactNormals,
