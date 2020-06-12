@@ -31,7 +31,6 @@ LP_status Solver_LP_qpoases::solve(Cref_vectorX c, Cref_vectorX lb, Cref_vectorX
 
   int iters = m_maxIter;
   double solutionTime = m_maxTime;
-  
   if (n != m_solver.getNV() || m != m_solver.getNC()) {
     m_solver = SQProblem(n, m, HST_ZERO);
     m_solver.setOptions(m_options);
@@ -54,6 +53,7 @@ LP_status Solver_LP_qpoases::solve(Cref_vectorX c, Cref_vectorX lb, Cref_vectorX
   if (m_status == SUCCESSFUL_RETURN) {
     m_solver.getPrimalSolution(sol.data());
   }
+  
   return getStatus();
 }
 

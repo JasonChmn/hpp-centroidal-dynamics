@@ -51,6 +51,7 @@ Equilibrium::Equilibrium(const string& name, const double mass, const unsigned i
     m_is_cdd_initialized = true;
     // srand ( (unsigned int) (time(NULL)) );
   }
+  
   m_name = name;
   m_solver_type = solver_type;
   m_solver = Solver_LP_abstract::getNewSolver(solver_type);
